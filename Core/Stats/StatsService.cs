@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
 using Newtonsoft.Json;
@@ -27,10 +28,34 @@ namespace Core.Stats
 
             var parsedResponse = JsonConvert.DeserializeObject<ServerStatusResponse>(result);
 
+            var greenColour = Color.FromArgb(255, 39, 174, 96);
+            var amberColour = Color.FromArgb(255, 230, 126, 34);
+            var redColour = Color.FromArgb(255, 231, 76, 60);
+
+            var cpuUsage = double.Parse(parsedResponse.cpu);
+            var memoryUsage = double.Parse(parsedResponse.memory);
+
+            var cpuColour = greenColour;
+            var memoryColour = greenColour;
+
+            if (cpuUsage > 75)
+                cpuColour = redColour;
+
+            if (cpuUsage > 50)
+                cpuColour = amberColour;
+
+            if (memoryUsage > 75)
+                memoryColour = redColour;
+
+            if (memoryUsage > 50)
+                memoryColour = amberColour;
+            
             return new ServerStatus
             {
-                CpuUsage = double.Parse(parsedResponse.cpu),
-                MemoryUsage = double.Parse(parsedResponse.memory)
+                CpuUsage = cpuUsage,
+                MemoryUsage = memoryUsage,
+                CpuColour = cpuColour,
+                MemoryColour = memoryColour
             };
         }
     }
@@ -45,5 +70,7 @@ namespace Core.Stats
     {
         public double CpuUsage { get; set; }
         public double MemoryUsage { get; set; }
+        public Color CpuColour { get; set; }
+        public Color MemoryColour { get; set; }
     }
 }

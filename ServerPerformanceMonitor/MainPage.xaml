@@ -12,6 +12,8 @@
         <TextBlock Name="CpuUsageBox" HorizontalAlignment="Left" Margin="160,36,0,0" TextWrapping="Wrap" Text="0%" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="38,73,0,0" TextWrapping="Wrap" Text="Memory Usage" VerticalAlignment="Top"/>
         <TextBlock Name="MemoryUsageBox" HorizontalAlignment="Left" Margin="160,73,0,0" TextWrapping="Wrap" Text="0%" VerticalAlignment="Top"/>
+        <ProgressBar Name="CpuProgressBar" Minimum="0" Maximum="100" HorizontalAlignment="Left" Height="30" Margin="241,31,0,0" VerticalAlignment="Top" Width="945"/>
+        <ProgressBar Name="MemoryProgressBar" Minimum="0" Maximum="100" HorizontalAlignment="Left" Height="30" Margin="241,69,0,0" VerticalAlignment="Top" Width="945"/>
 
     </Grid>
 </Page>
