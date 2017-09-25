@@ -59,18 +59,4 @@ namespace Core.Stats
             };
         }
     }
-
-    public class ServerStatusResponse
-    {
-        public string cpu { get; set; }
-        public string memory { get; set; }
-    }
-
-    public class ServerStatus
-    {
-        public double CpuUsage { get; set; }
-        public double MemoryUsage { get; set; }
-        public Color CpuColour { get; set; }
-        public Color MemoryColour { get; set; }
-    }
 }
