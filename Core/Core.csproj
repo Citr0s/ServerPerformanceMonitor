@@ -107,6 +107,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stats\Statistic.cs" />
     <Compile Include="Stats\ServerStatus.cs" />
     <Compile Include="Stats\ServerStatusResponse.cs" />
     <Compile Include="Stats\StatsService.cs" />

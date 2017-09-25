@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Threading.Tasks;
-using Windows.UI;
 using Windows.UI.Xaml.Media;
 using Core.Stats;
 
@@ -24,14 +23,14 @@ namespace ServerPerformanceMonitor
             {
                 var stats = await _statsService.GetStatus();
 
-                CpuUsageBox.Text = $"{stats.CpuUsage.ToString(CultureInfo.InvariantCulture)}%";
-                MemoryUsageBox.Text = $"{stats.MemoryUsage.ToString(CultureInfo.InvariantCulture)}%";
+                CpuUsageBox.Text = $"{stats.Cpu.Usage.ToString(CultureInfo.InvariantCulture)}%";
+                MemoryUsageBox.Text = $"{stats.Memory.Usage.ToString(CultureInfo.InvariantCulture)}%";
                 
-                CpuProgressBar.Foreground = new SolidColorBrush(stats.CpuColour);
-                MemoryProgressBar.Foreground = new SolidColorBrush(stats.MemoryColour);
+                CpuProgressBar.Foreground = new SolidColorBrush(stats.Cpu.Colour);
+                MemoryProgressBar.Foreground = new SolidColorBrush(stats.Memory.Colour);
 
-                CpuProgressBar.Value = stats.CpuUsage;
-                MemoryProgressBar.Value = stats.MemoryUsage;
+                CpuProgressBar.Value = stats.Cpu.Usage;
+                MemoryProgressBar.Value = stats.Memory.Usage;
 
                 await Task.Delay(1000);
             }

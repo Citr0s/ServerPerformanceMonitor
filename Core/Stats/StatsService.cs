@@ -27,36 +27,37 @@ namespace Core.Stats
             var result = await _httpClient.GetStringAsync(uri);
 
             var parsedResponse = JsonConvert.DeserializeObject<ServerStatusResponse>(result);
+            
+            return new ServerStatus
+            {
+                Cpu = new Statistic
+                {
+                    Usage = parsedResponse.cpu,
+                    Colour = GetStatusColour(parsedResponse.cpu)
+                },
+                Memory = new Statistic
+                {
+                    Usage = parsedResponse.memory,
+                    Colour = GetStatusColour(parsedResponse.memory)
+                }
+            };
+        }
 
+        private static Color GetStatusColour(double usage)
+        {
             var greenColour = Color.FromArgb(255, 39, 174, 96);
             var amberColour = Color.FromArgb(255, 230, 126, 34);
             var redColour = Color.FromArgb(255, 231, 76, 60);
 
-            var cpuUsage = double.Parse(parsedResponse.cpu);
-            var memoryUsage = double.Parse(parsedResponse.memory);
+            var colour = greenColour;
 
-            var cpuColour = greenColour;
-            var memoryColour = greenColour;
+            if (usage > 75)
+                colour = redColour;
 
-            if (cpuUsage > 75)
-                cpuColour = redColour;
+            if (usage > 50)
+                colour = amberColour;
 
-            if (cpuUsage > 50)
-                cpuColour = amberColour;
-
-            if (memoryUsage > 75)
-                memoryColour = redColour;
-
-            if (memoryUsage > 50)
-                memoryColour = amberColour;
-            
-            return new ServerStatus
-            {
-                CpuUsage = cpuUsage,
-                MemoryUsage = memoryUsage,
-                CpuColour = cpuColour,
-                MemoryColour = memoryColour
-            };
+            return colour;
         }
     }
 }
